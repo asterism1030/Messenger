@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,9 +31,35 @@ namespace utility
             {
                 var formatter = new BinaryFormatter();
 
-                return (Packet)formatter.Deserialize(memoryStream);
+                formatter.Binder = new PreMergeToMergedDeserializationBinder();
+                object obj = formatter.Deserialize(memoryStream);
+
+                memoryStream.Close();
+
+                return (Packet)obj;
             }
         }
 
+
+
+    }
+
+
+
+
+    
+    sealed class PreMergeToMergedDeserializationBinder : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName)
+        {
+            Type typeToDeserialize = null;
+
+            String exeAssembly = Assembly.GetExecutingAssembly().FullName;
+
+
+            typeToDeserialize = Type.GetType(String.Format("{0}, {1}", typeName, exeAssembly));
+
+            return typeToDeserialize;
+        }
     }
 }

@@ -9,7 +9,8 @@
       "Client/1.0.0": {
         "dependencies": {
           "MaterialDesignColors": "3.1.0",
-          "MaterialDesignThemes": "5.1.0"
+          "MaterialDesignThemes": "5.1.0",
+          "Server": "1.0.0.0"
         },
         "runtime": {
           "Client.dll": {}
@@ -42,6 +43,14 @@
             "fileVersion": "1.1.39.4716"
           }
         }
+      },
+      "Server/1.0.0.0": {
+        "runtime": {
+          "Server.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -71,6 +80,11 @@
       "sha512": "sha512-8PZKqw9QOcu42xk8puY4P1+EXHL9YGOR9b7qhaYx5cILHul456H073tj99vyPcCt0W0781T9RwHqkx507ZyUpQ==",
       "path": "microsoft.xaml.behaviors.wpf/1.1.39",
       "hashPath": "microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+    },
+    "Server/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using tcpip;
 
 namespace Client
 {
@@ -9,5 +10,10 @@ namespace Client
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            TcpIp.Instance.Start();
+        }
+
     }
 }

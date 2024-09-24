@@ -13,4 +13,10 @@
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Server">
+      <HintPath>..\Server\bin\Debug\net6.0\Server.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
