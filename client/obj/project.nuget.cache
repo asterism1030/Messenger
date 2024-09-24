@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "5TPq5OSHo/QAeNzpxjRXjVNIc0Pcql6W4FGbPdJlIeSeHPqLkofrFvzjzHUhkP5TDH8yyth3fbisUgyfijqcPg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rlagu\\Desktop\\gitgit\\Messenger\\Client\\Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rlagu\\.nuget\\packages\\materialdesigncolors\\3.1.0\\materialdesigncolors.3.1.0.nupkg.sha512",
+    "C:\\Users\\rlagu\\.nuget\\packages\\materialdesignthemes\\5.1.0\\materialdesignthemes.5.1.0.nupkg.sha512",
+    "C:\\Users\\rlagu\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+  ],
+  "logs": []
+}
