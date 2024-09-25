@@ -1,4 +1,5 @@
-﻿using messenger.model;
+﻿using Client.view;
+using messenger.model;
 using messenger.utility;
 using messenger.viewmodel;
 using PacketLib;
@@ -55,9 +56,10 @@ namespace Client
                 return;
             }
 
+            // 채팅방 입장 요청
             ChatRoomListItemModel chatRoom = (ChatRoomListItemModel)listView.SelectedItem;
 
-            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_ENTER, chatRoom);
+            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_ENTER, chatRoom.Id);
         }
 
 
@@ -71,7 +73,8 @@ namespace Client
             }
             else if(packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_ENTER)
             {
-
+                ChattingRoom chattingRoom = new ChattingRoom();
+                chattingRoom.Activate();
             }
         }
     }
