@@ -79,11 +79,11 @@ namespace tcpip
 
 
                     // Command - 패킷 처리
-                    if (receivedPacket.Command == (int)Command.TYPE.REQUEST_CHATROOM_LIST)
+                    if (receivedPacket.Command == (int)Command.CLIENT.REQUEST_CHATROOM_LIST)
                     {
                         var responsePacket = new Packet
                         {
-                            Command = (int)Command.TYPE.REQUEST_CHATROOM_LIST,
+                            Command = (int)Command.SERVER.SEND_CHATROOM_LIST,
                             Data = chatroomList
                         };
 

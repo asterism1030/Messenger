@@ -8,13 +8,22 @@ namespace messenger.utility
 {
     public static class Command
     {
-        public enum TYPE {
+        public enum CLIENT {
             REQUEST_CHATROOM_LIST,
             REQUEST_CHATROOM_ENTER,
+            REQUEST_CREATEROOM,
             
             SEND_MESSAGE,
-            SEND_CREATEROOM,
         }
 
+        public enum SERVER
+        {
+            SEND_CHATROOM_LIST,
+
+            ACCEPT_CHATROOM_ENTER,
+            ACCEPT_CREATEROOM,
+
+            SEND_MESSAGE,
+        }
     }
 }

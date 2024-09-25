@@ -13,8 +13,7 @@ namespace Client
             TcpIp.Instance.Start();
 
 
-            // 초기 필요한 데이터 요청
-            TcpIp.Instance.SendPacket(Command.TYPE.REQUEST_CHATROOM_LIST);
+            
         }
 
     }

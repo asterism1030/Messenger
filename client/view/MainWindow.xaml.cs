@@ -27,6 +27,9 @@ namespace Client
             TcpIp.Instance.PacketReceived += OnPacketReceived;
 
             lv_chatrooms.ItemsSource = viewmodel.ChatRoomList;
+
+            // 초기 필요한 데이터 요청
+            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_LIST);
         }
 
         
@@ -53,18 +56,22 @@ namespace Client
             }
 
             ChatRoomListItemModel chatRoom = (ChatRoomListItemModel)listView.SelectedItem;
-            
 
+            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_ENTER, chatRoom);
         }
 
 
         private void OnPacketReceived(Packet packet)
         {
-            if (packet.Command == (int)Command.TYPE.REQUEST_CHATROOM_LIST)
+            if (packet.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)
             {
                 Dispatcher.Invoke(() => {
                     viewmodel.UpdateChatRoomList((List<ChatRoomListItemModel>)packet.Data);
                 });
+            }
+            else if(packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_ENTER)
+            {
+
             }
         }
     }

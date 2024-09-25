@@ -51,12 +51,12 @@ namespace tcpip
         }
 
 
-        public void SendPacket(Command.TYPE command)
+        public void SendPacket(Command.CLIENT command, Object data = null)
         {
             var packet = new Packet
             {
                 Command = (int)command,
-                Data = null
+                Data = data
             };
 
             byte[] requestData = Converting.PacketToByteArray(packet);
@@ -82,7 +82,7 @@ namespace tcpip
                     Packet receivedPacket = Converting.ByteArrayToPacket(buffer.Take(bytesRead).ToArray());
 
                     // 패킷 유형별 처리
-                    if(receivedPacket.Command == (int)Command.TYPE.REQUEST_CHATROOM_LIST)
+                    if(receivedPacket.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)
                     {
                         List<ChatRoomListItemModel> list = (List<ChatRoomListItemModel>)receivedPacket.Data;
 
