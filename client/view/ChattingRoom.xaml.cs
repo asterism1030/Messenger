@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Client.viewmodel;
+using PacketLib.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +18,17 @@ namespace Client.view
 {
     public partial class ChattingRoom : Window
     {
-        public ChattingRoom()
+        private ChattingRoomViewModel viewmodel;
+
+        public ChattingRoom(ChatRoomModel chatRoomModel)
         {
             InitializeComponent();
+
+            viewmodel = new ChattingRoomViewModel(chatRoomModel);
+
+            lv_chathistory.ItemsSource = viewmodel.ChatHistory;
         }
+
+
     }
 }

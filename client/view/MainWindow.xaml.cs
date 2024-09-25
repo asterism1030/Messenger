@@ -19,7 +19,7 @@ namespace Client
 {
     public partial class MainWindow : Window
     {
-        private ChatRoomListViewModel viewmodel = new ChatRoomListViewModel();
+        private MainWindowViewModel viewmodel = new MainWindowViewModel();
 
         public MainWindow()
         {

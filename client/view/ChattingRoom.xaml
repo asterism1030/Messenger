@@ -16,11 +16,19 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Margin="10">
             <ListView x:Name="lv_chathistory">
-
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding chatterName}"/>
+                            <TextBlock Text="{Binding content}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
-            <TextBox Height="70" Width="370" BorderThickness="1" BorderBrush="#ca94f7" x:Name="tb_message"/>
+            <TextBox Height="70" Width="370" BorderThickness="1" BorderBrush="#ca94f7" x:Name="tb_message" 
+                     TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
     </Grid>
 </Window>

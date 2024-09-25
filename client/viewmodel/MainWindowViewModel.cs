@@ -11,7 +11,7 @@ using tcpip;
 
 namespace messenger.viewmodel
 {
-    public class ChatRoomListViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<ChatRoomListItemModel> chatRoomList = new ObservableCollection<ChatRoomListItemModel>();
         public ObservableCollection<ChatRoomListItemModel> ChatRoomList
@@ -23,7 +23,7 @@ namespace messenger.viewmodel
             }
         }
 
-        public ChatRoomListViewModel() 
+        public MainWindowViewModel() 
         {
             
         }
