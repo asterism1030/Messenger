@@ -35,20 +35,23 @@ namespace tcpip
             ChatRoomListItemModel test = new ChatRoomListItemModel();
             ChatRoomModel tt = new ChatRoomModel();
 
+            ChatModel cc = new ChatModel();
+            cc.chatterName = "에디";
+            cc.content = "나는야 발명가";
+
+            ChatModel cc_1 = new ChatModel();
+            cc_1.chatterName = "페티";
+            cc_1.content = "나는 고기 패티가 아니야";
+
             test.Id = 0;
             test.Creater = "크롱";
             test.Cnt = 0;
             test.Name = "빠른 이직 기원";
+            
             tt.chatRoomInfo = test;
 
-            chatroomDic.Add(test.Id, tt);
-            chatroomsList.Add(test);
-            /////////////////////
-            test.Id = 1;
-            test.Creater = "루피";
-            test.Cnt = 0;
-            test.Name = "빠른 이직 기원";
-            tt.chatRoomInfo = test;
+            tt.chatHistory.Add(cc);
+            tt.chatHistory.Add(cc_1);
 
             chatroomDic.Add(test.Id, tt);
             chatroomsList.Add(test);
@@ -79,17 +82,33 @@ namespace tcpip
         {
             TcpClient client = (TcpClient)clientObj;
             NetworkStream stream = client.GetStream();
-            byte[] buffer = new byte[1024];
+
+            byte[] buffer = new byte[51200];
 
             while (true)
             {
+
                 try
                 {
+                    // 연결 상태 확인
+                    if (client.Client.Poll(1000, SelectMode.SelectRead))
+                    {
+                        if (client.Client.Available == 0)
+                        {
+                            Console.WriteLine("클라이언트 연결 끊김");
+                            client.Close();
+                            break;
+                        }
+                    }
+
+
+                    //byte[] buffer = Converting.StreamToByteArry(stream);
+
                     int bytesRead = stream.Read(buffer, 0, buffer.Length);
                     if (bytesRead == 0) break;
 
                     // 바이트 배열을 패킷으로 변환
-                    Packet receivedPacket = Converting.ByteArrayToPacket(buffer.Take(bytesRead).ToArray());
+                    Packet receivedPacket = Converting.ByteArrayToPacket(buffer.Take(buffer.Length).ToArray());
 
 
                     // Command - 패킷 처리

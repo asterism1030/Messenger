@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacketLib.model
 {
+    [Serializable]
     public class ChatModel
     {
         public string chatterName { get; set; } // 대상 아이디

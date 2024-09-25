@@ -15,7 +15,6 @@ namespace PacketLib.model
         public List<string> chatters { get; set; }
         public List<ChatModel> chatHistory { get; set; }
 
-
         public ChatRoomModel()
         {
             chatters = new List<string>();

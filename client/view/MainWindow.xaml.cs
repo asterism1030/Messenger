@@ -44,7 +44,9 @@ namespace Client
 
         private void btn_create_chat_Click(object sender, RoutedEventArgs e)
         {
-
+            // Test
+            // 초기 필요한 데이터 요청
+            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_LIST);
         }
 
 

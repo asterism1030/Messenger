@@ -69,7 +69,7 @@ namespace tcpip
 
         public void ReceivePacket()
         {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[51200];
 
             while (true)
             {
