@@ -3,6 +3,7 @@ using messenger.model;
 using messenger.utility;
 using messenger.viewmodel;
 using PacketLib;
+using PacketLib.model;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -73,9 +74,10 @@ namespace Client
             }
             else if(packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_ENTER)
             {
+                ChatRoomModel chatRoomModel = (ChatRoomModel)packet.Data;
 
                 Dispatcher.Invoke(() => {
-                    ChattingRoom chattingRoom = new ChattingRoom();
+                    ChattingRoom chattingRoom = new ChattingRoom(chatRoomModel);
                     chattingRoom.Show();
                 });
                 
