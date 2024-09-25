@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="PacketLib">
+      <HintPath>..\PacketLib\bin\Debug\net6.0\PacketLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

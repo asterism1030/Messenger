@@ -54,5 +54,5 @@ C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\refint\C
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.pdb
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.genruntimeconfig.cache
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\ref\Client.dll
-C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\Server.dll
-C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\Server.pdb
+C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\PacketLib.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\PacketLib.pdb

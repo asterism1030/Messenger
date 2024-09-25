@@ -10,7 +10,7 @@
         "dependencies": {
           "MaterialDesignColors": "3.1.0",
           "MaterialDesignThemes": "5.1.0",
-          "Server": "1.0.0.0"
+          "PacketLib": "1.0.0.0"
         },
         "runtime": {
           "Client.dll": {}
@@ -44,9 +44,9 @@
           }
         }
       },
-      "Server/1.0.0.0": {
+      "PacketLib/1.0.0.0": {
         "runtime": {
-          "Server.dll": {
+          "PacketLib.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -81,7 +81,7 @@
       "path": "microsoft.xaml.behaviors.wpf/1.1.39",
       "hashPath": "microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
     },
-    "Server/1.0.0.0": {
+    "PacketLib/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

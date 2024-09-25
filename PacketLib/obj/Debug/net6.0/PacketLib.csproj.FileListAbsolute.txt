@@ -1,0 +1,12 @@
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\bin\Debug\net6.0\PacketLib.deps.json
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\bin\Debug\net6.0\PacketLib.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\bin\Debug\net6.0\PacketLib.pdb
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.csproj.AssemblyReference.cache
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.AssemblyInfoInputs.cache
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.AssemblyInfo.cs
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.csproj.CoreCompileInputs.cache
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\refint\PacketLib.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\PacketLib.pdb
+C:\Users\rlagu\Desktop\gitgit\Messenger\PacketLib\obj\Debug\net6.0\ref\PacketLib.dll

@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Server">
-      <HintPath>..\Server\bin\Debug\net6.0\Server.dll</HintPath>
+    <Reference Include="PacketLib">
+      <HintPath>..\PacketLib\bin\Debug\net6.0\PacketLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 

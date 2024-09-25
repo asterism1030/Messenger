@@ -28,3 +28,6 @@ C:\Users\rlagu\Desktop\gitgit\Messenger\Server\obj\Debug\net6.0\refint\Server.dl
 C:\Users\rlagu\Desktop\gitgit\Messenger\Server\obj\Debug\net6.0\Server.pdb
 C:\Users\rlagu\Desktop\gitgit\Messenger\Server\obj\Debug\net6.0\Server.genruntimeconfig.cache
 C:\Users\rlagu\Desktop\gitgit\Messenger\Server\obj\Debug\net6.0\ref\Server.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\Server\bin\Debug\net6.0\PacketLib.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\Server\bin\Debug\net6.0\PacketLib.pdb
+C:\Users\rlagu\Desktop\gitgit\Messenger\Server\obj\Debug\net6.0\Server.csproj.CopyComplete

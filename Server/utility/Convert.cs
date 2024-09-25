@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacketLib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -54,7 +55,8 @@ namespace utility
         {
             Type typeToDeserialize = null;
 
-            String exeAssembly = Assembly.GetExecutingAssembly().FullName;
+            //String exeAssembly = Assembly.GetExecutingAssembly().FullName;
+            String exeAssembly = "PacketLib";
 
 
             typeToDeserialize = Type.GetType(String.Format("{0}, {1}", typeName, exeAssembly));
