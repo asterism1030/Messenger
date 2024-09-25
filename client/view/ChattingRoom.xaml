@@ -6,30 +6,30 @@
         xmlns:local="clr-namespace:Client.view"
         mc:Ignorable="d"
         Title="messenger_1" Height="510" Width="400" >
-    <Grid >
+    <Grid Background="AliceBlue">
         <!--Background="#E3FDFA">-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="385*" />
-            <RowDefinition Height="89*" />
+            <RowDefinition Height="390*" />
+            <RowDefinition Height="75*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0" Margin="10">
-            <ScrollViewer x:Name="sv_chathistory" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="10" Background="Transparent">
+            <ScrollViewer x:Name="sv_chathistory" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" >
                 <ListView x:Name="lv_chathistory" Height="385" MouseDoubleClick="lv_chathistory_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding chatterName}" FontSize="10" TextWrapping="Wrap" />
-                                <TextBlock Text="{Binding content}" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding chatterName}" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
+                                <TextBlock Text="{Binding content}" TextWrapping="Wrap" Background="Transparent" MaxWidth ="300"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+        <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" >
             <TextBox Height="55" Width="370" BorderThickness="1" BorderBrush="#2196F3" x:Name="tb_message" 
                      MaxLength = "300"  TextWrapping="Wrap" AcceptsReturn="False" KeyDown="tb_message_KeyDown"/>
         </StackPanel>

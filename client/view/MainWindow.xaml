@@ -11,12 +11,12 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="385*" />
-            <RowDefinition Height="89*" />
+            <RowDefinition Height="350*" />
+            <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Background="WhiteSmoke">
             <ScrollViewer x:Name="sv_chatrooms" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" >
-                <ListView Height="380" x:Name="lv_chatrooms" MouseDoubleClick="lv_chatrooms_MouseDoubleClick">
+                <ListView Height="350" x:Name="lv_chatrooms" MouseDoubleClick="lv_chatrooms_MouseDoubleClick">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="id" Width="50" />
@@ -31,11 +31,19 @@
 
         <StackPanel Grid.Column="0" Grid.Row="1">
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-                <TextBox Width="200" MaxLength="30" x:Name="tb_chat_name"/>
-                <Button Margin="55, 0, 0, 0" Width="auto" Content="채팅방 생성" x:Name="btn_create_chat" Click="btn_create_chat_Click"/>
+                <StackPanel Background="Transparent" Width="250" Height="100">
+                    <TextBlock Text="방 이름" VerticalAlignment="Center" />
+                    <TextBox MaxLength="30" x:Name="tb_chat_name" Width="200" HorizontalAlignment="Right"/>
+
+                    <TextBlock Text="닉네임" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tb_nickname" Width="100" HorizontalAlignment="Right" Text="신나는 라이언" MaxLength="10"/>
+                </StackPanel>
+
+                <Button Height="28" Margin="40, 60, 0, 0" Width="auto" Content="채팅방 생성"
+                        x:Name="btn_create_chat" Click="btn_create_chat_Click"/>
             </StackPanel>
 
-            <TextBox x:Name="tb_nickname" Width="100" HorizontalAlignment="Right" Margin="0, 5, 30, 0" Text="신나는 라이언" MaxLength="10"/>
+
         </StackPanel>
     </Grid>
 </Window>
