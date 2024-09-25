@@ -21,7 +21,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="id" Width="50" />
                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="200" />
                         <GridViewColumn DisplayMemberBinding="{Binding Creater}" Header="생성자" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Cnt}" Header="인원" Width="50"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Cnt}" Header="인원" Width="40"/>
                     </GridView>
                 </ListView.View>
             </ListView>

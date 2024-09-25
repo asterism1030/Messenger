@@ -13,6 +13,12 @@ namespace Client.viewmodel
     public class ChattingRoomViewModel : INotifyPropertyChanged
     {
         private ChatRoomListItemModel chatRoomInfo;
+        public ChatRoomListItemModel ChatRoomInfo { get; }
+
+        private string userNickName;
+        public string UserNickName { get; }
+
+
         private List<string> chatters;
 
         private ObservableCollection<ChatModel> chatHistory = new ObservableCollection<ChatModel>();
@@ -27,9 +33,11 @@ namespace Client.viewmodel
         }
 
 
-        public ChattingRoomViewModel(ChatRoomModel chatRoomModel)
+        public ChattingRoomViewModel(ChatRoomModel chatRoomModel, string nickName)
         {
-            if(chatRoomModel == null)
+            userNickName = nickName;
+
+            if (chatRoomModel == null)
             {
                 return;
             }

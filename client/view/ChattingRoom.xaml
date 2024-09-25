@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client.view"
         mc:Ignorable="d"
-        Title="채팅방_1" Height="500" Width="400" ResizeMode="NoResize">
+        Title="messenger_1" Height="500" Width="400" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -19,7 +19,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding chatterName}"/>
+                            <TextBlock Text="{Binding chatterName}" FontSize="10"/>
                             <TextBlock Text="{Binding content}"/>
                         </StackPanel>
                     </DataTemplate>
@@ -27,8 +27,8 @@
             </ListView>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
-            <TextBox Height="70" Width="370" BorderThickness="1" BorderBrush="#ca94f7" x:Name="tb_message" 
-                     TextWrapping="Wrap" AcceptsReturn="True"/>
+            <TextBox Height="55" Width="370" BorderThickness="1" BorderBrush="#ca94f7" x:Name="tb_message" 
+                     MaxLength = "300"  TextWrapping="Wrap" AcceptsReturn="True" KeyDown="tb_message_KeyDown"/>
         </StackPanel>
     </Grid>
 </Window>

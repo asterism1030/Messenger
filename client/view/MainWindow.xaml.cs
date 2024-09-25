@@ -79,7 +79,7 @@ namespace Client
                 ChatRoomModel chatRoomModel = (ChatRoomModel)packet.Data;
 
                 Dispatcher.Invoke(() => {
-                    ChattingRoom chattingRoom = new ChattingRoom(chatRoomModel);
+                    ChattingRoom chattingRoom = new ChattingRoom(chatRoomModel, tb_nickname.Text);
                     chattingRoom.Show();
                 });
                 

@@ -15,7 +15,13 @@ namespace tcpip
 {
     public class TcpIp 
     {
+
+        // 클라이언트
         private static List<TcpClient> clients = new List<TcpClient>();
+
+        // TODO) 사용
+        private static Dictionary<string, TcpClient> clientsDic = new Dictionary<string, TcpClient>(); // 닉네임,클라이언트
+        
         private static TcpListener server;
 
 
@@ -24,7 +30,7 @@ namespace tcpip
         private static List<ChatRoomListItemModel> chatroomsList = new List<ChatRoomListItemModel>();
         // 채팅방 (대화 이력, 정보 등)
         private static Dictionary<int, ChatRoomModel> chatroomDic = new Dictionary<int, ChatRoomModel>();
-
+        
 
 
 
@@ -125,8 +131,9 @@ namespace tcpip
                         stream.Write(responseData, 0, responseData.Length);
                     }
 
-                    if (receivedPacket.Command == (int)(Command.CLIENT.REQUEST_CHATROOM_ENTER)) // 클라 - 채팅방 입장 요청
+                    else if (receivedPacket.Command == (int)(Command.CLIENT.REQUEST_CHATROOM_ENTER)) // 클라 - 채팅방 입장 요청
                     {
+                        // TODO) 닉네임 추가하여 수정
                         int id = (int)receivedPacket.Data;
 
                         var responsePacket = new Packet
@@ -138,6 +145,34 @@ namespace tcpip
 
                         byte[] responseData = Converting.PacketToByteArray(responsePacket);
                         stream.Write(responseData, 0, responseData.Length);
+                    }
+
+                    else if (receivedPacket.Command == (int)(Command.CLIENT.SEND_MESSAGE)) // 클라 - 채팅방 메시지 전송
+                    {
+                        ChatIdModel chatIdModel = (ChatIdModel)receivedPacket.Data;
+
+                        ChatModel chat = new ChatModel();
+                        chat.chatterName = chatIdModel.chatterName;
+                        chat.content = chatIdModel.content;
+
+
+                        var responsePacket = new Packet
+                        {
+                            Command = (int)Command.SERVER.SEND_MESSAGE,
+                            Data = chat
+                        };
+
+
+
+                        // TODO) 채팅방 인원들에게만 broadcast
+                        List<TcpClient> targetClients = new List<TcpClient>();
+
+                        ChatRoomModel chatters = chatroomDic[chatIdModel.id];
+
+
+                        BroadcastMessage(responsePacket, client, clients);
+                        ///////////////////////////////////////////
+
                     }
 
 
@@ -154,15 +189,17 @@ namespace tcpip
                     break;
                 }
             }
+
+            client.Close();
         }
 
 
-        private static void BroadcastMessage(Packet packet, TcpClient sender)
+        private static void BroadcastMessage(Packet packet, TcpClient sender, List<TcpClient> targetClients)
         {
             byte[] responseData = Converting.PacketToByteArray(packet);
 
             // 모든 클라이언트에게 메시지 전송
-            foreach (TcpClient client in clients)
+            foreach (TcpClient client in targetClients)
             {
                 if (client != sender) // 보낸 클라이언트는 제외
                 {
