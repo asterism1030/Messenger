@@ -3,6 +3,7 @@ using messenger.designPattern;
 using messenger.model;
 using messenger.utility;
 using PacketLib;
+using PacketLib.model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,6 +37,8 @@ namespace tcpip
         public void Start()
         {
             Thread receiveThread = new Thread(() => ReceivePacket());
+            receiveThread.SetApartmentState(ApartmentState.STA);
+            receiveThread.IsBackground = true;
             receiveThread.Start();
 
             Debug.WriteLine("서버 연결");
@@ -84,10 +87,18 @@ namespace tcpip
                     // 패킷 유형별 처리
                     if(receivedPacket.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)
                     {
-                        List<ChatRoomListItemModel> list = (List<ChatRoomListItemModel>)receivedPacket.Data;
+                        //List<ChatRoomListItemModel> list = (List<ChatRoomListItemModel>)receivedPacket.Data;
 
                         PacketReceived?.Invoke(receivedPacket);
                     }
+                    
+                    else if (receivedPacket.Command == (int)(Command.SERVER.ACCEPT_CHATROOM_ENTER))
+                    {
+                        //ChatRoomModel chatroom = (ChatRoomModel)receivedPacket.Data;
+
+                        PacketReceived?.Invoke(receivedPacket);
+                    }
+
                     // TODO) 추가
 
                 }

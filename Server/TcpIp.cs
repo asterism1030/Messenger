@@ -106,7 +106,7 @@ namespace tcpip
                         stream.Write(responseData, 0, responseData.Length);
                     }
 
-                    if (receivedPacket.Command == (int)Command.CLIENT.REQUEST_CHATROOM_ENTER) // 클라 - 채팅방 입장 요청
+                    if (receivedPacket.Command == (int)(Command.CLIENT.REQUEST_CHATROOM_ENTER)) // 클라 - 채팅방 입장 요청
                     {
                         int id = (int)receivedPacket.Data;
 
@@ -126,7 +126,7 @@ namespace tcpip
                     else
                     {
                         // 메시지를 모든 클라이언트에 브로드캐스트
-                        BroadcastMessage(receivedPacket.Data.ToString(), client);
+                        //BroadcastMessage(receivedPacket, client);
                     }
                 }
                 catch (Exception ex)
@@ -138,9 +138,9 @@ namespace tcpip
         }
 
 
-        private static void BroadcastMessage(string message, TcpClient sender)
+        private static void BroadcastMessage(Packet packet, TcpClient sender)
         {
-            byte[] data = Encoding.UTF8.GetBytes(message);
+            byte[] responseData = Converting.PacketToByteArray(packet);
 
             // 모든 클라이언트에게 메시지 전송
             foreach (TcpClient client in clients)
@@ -148,7 +148,7 @@ namespace tcpip
                 if (client != sender) // 보낸 클라이언트는 제외
                 {
                     NetworkStream stream = client.GetStream();
-                    stream.Write(data, 0, data.Length);
+                    stream.Write(responseData, 0, responseData.Length);
                 }
             }
         }

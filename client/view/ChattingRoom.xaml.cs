@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace Client.view
 {
-    /// <summary>
-    /// ChattingRoom.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class ChattingRoom : Window
     {
         public ChattingRoom()

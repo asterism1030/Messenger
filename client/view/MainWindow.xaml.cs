@@ -73,8 +73,13 @@ namespace Client
             }
             else if(packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_ENTER)
             {
-                ChattingRoom chattingRoom = new ChattingRoom();
-                chattingRoom.Activate();
+
+                Dispatcher.Invoke(() => {
+                    ChattingRoom chattingRoom = new ChattingRoom();
+                    chattingRoom.Show();
+                });
+                
+                
             }
         }
     }
