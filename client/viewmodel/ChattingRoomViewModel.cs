@@ -13,10 +13,10 @@ namespace Client.viewmodel
     public class ChattingRoomViewModel : INotifyPropertyChanged
     {
         private ChatRoomListItemModel chatRoomInfo;
-        public ChatRoomListItemModel ChatRoomInfo { get; }
+        public ChatRoomListItemModel ChatRoomInfo { get { return chatRoomInfo; } }
 
         private string userNickName;
-        public string UserNickName { get; }
+        public string UserNickName { get { return userNickName; } }
 
 
         private List<string> chatters;

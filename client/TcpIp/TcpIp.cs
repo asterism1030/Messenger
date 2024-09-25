@@ -87,15 +87,16 @@ namespace tcpip
                     // 패킷 유형별 처리
                     if(receivedPacket.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)
                     {
-                        //List<ChatRoomListItemModel> list = (List<ChatRoomListItemModel>)receivedPacket.Data;
-
                         PacketReceived?.Invoke(receivedPacket);
                     }
                     
                     else if (receivedPacket.Command == (int)(Command.SERVER.ACCEPT_CHATROOM_ENTER))
                     {
-                        //ChatRoomModel chatroom = (ChatRoomModel)receivedPacket.Data;
+                        PacketReceived?.Invoke(receivedPacket);
+                    }
 
+                    else if (receivedPacket.Command == (int)(Command.SERVER.SEND_MESSAGE))
+                    {
                         PacketReceived?.Invoke(receivedPacket);
                     }
 

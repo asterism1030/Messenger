@@ -28,7 +28,7 @@
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
             <TextBox Height="55" Width="370" BorderThickness="1" BorderBrush="#ca94f7" x:Name="tb_message" 
-                     MaxLength = "300"  TextWrapping="Wrap" AcceptsReturn="True" KeyDown="tb_message_KeyDown"/>
+                     MaxLength = "300"  TextWrapping="Wrap" AcceptsReturn="False" KeyDown="tb_message_KeyDown"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -156,13 +156,16 @@ namespace tcpip
                         chat.content = chatIdModel.content;
 
 
+                        chatroomDic[chatIdModel.id].chatHistory.Add(chat);
+
+
                         var responsePacket = new Packet
                         {
                             Command = (int)Command.SERVER.SEND_MESSAGE,
                             Data = chat
                         };
 
-
+                        
 
                         // TODO) 채팅방 인원들에게만 broadcast
                         List<TcpClient> targetClients = new List<TcpClient>();
@@ -170,7 +173,8 @@ namespace tcpip
                         ChatRoomModel chatters = chatroomDic[chatIdModel.id];
 
 
-                        BroadcastMessage(responsePacket, client, clients);
+                        BroadcastMessage(responsePacket, null, clients);
+                        //BroadcastMessage(responsePacket, client, clients);
                         ///////////////////////////////////////////
 
                     }

@@ -39,7 +39,7 @@ namespace Client.view
 
         private void tb_message_KeyDown(object sender, KeyEventArgs e)
         {
-            if(tb_message.Text == "" || tb_message.Text == null)
+            if(string.IsNullOrWhiteSpace(tb_message.Text) || e.Key != System.Windows.Input.Key.Enter)
             {
                 return;
             }
@@ -55,7 +55,7 @@ namespace Client.view
             chatModel.chatterName = chat.chatterName;
             chatModel.content = chat.content;
 
-            viewmodel.ChatHistory.Add(chatModel);
+            //viewmodel.ChatHistory.Add(chatModel);
 
 
             TcpIp.Instance.SendPacket(Command.CLIENT.SEND_MESSAGE, chat);
