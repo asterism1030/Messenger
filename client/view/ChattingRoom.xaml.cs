@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using tcpip;
 
 namespace Client.view
@@ -33,6 +34,13 @@ namespace Client.view
             viewmodel = new ChattingRoomViewModel(chatRoomModel, nickName);
 
             lv_chathistory.ItemsSource = viewmodel.ChatHistory;
+
+            if(lv_chathistory.Items.Count > 0)
+            {
+                lv_chathistory.ScrollIntoView(lv_chathistory.Items[lv_chathistory.Items.Count - 1]);
+            }
+            
+
             this.Title = chatRoomModel.chatRoomInfo.Name;
         }
 
@@ -64,6 +72,21 @@ namespace Client.view
             tb_message.Text = "";
         }
 
+        private void lv_chathistory_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView listView = (ListView)sender;
+
+            if (listView.SelectedItem == null)
+            {
+                return;
+            }
+
+            ChatModel chatModel = (ChatModel)listView.SelectedItem;
+            Clipboard.SetText(chatModel.content);
+
+            MessageBox.Show("복사 되었습니다.");
+        }
+
 
         private void OnPacketReceived(Packet packet)
         {
@@ -73,8 +96,13 @@ namespace Client.view
 
                 Dispatcher.Invoke(() => {
                     viewmodel.ChatHistory.Add(chat);
+
+                    lv_chathistory.ScrollIntoView(lv_chathistory.Items[lv_chathistory.Items.Count - 1]);
                 });
+
             }
         }
+
+        
     }
 }

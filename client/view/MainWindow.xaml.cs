@@ -44,9 +44,31 @@ namespace Client
 
         private void btn_create_chat_Click(object sender, RoutedEventArgs e)
         {
-            // Test
-            // 초기 필요한 데이터 요청
-            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_LIST);
+            if(string.IsNullOrEmpty(tb_chat_name.Text) || string.IsNullOrEmpty(tb_nickname.Text))
+            {
+                return;
+            }
+
+            ChatRoomModel chatRoomModel = new ChatRoomModel();
+
+            // init
+            ChatRoomListItemModel chatRoomInfo = new ChatRoomListItemModel();
+            chatRoomInfo.Name = tb_chat_name.Text;
+            chatRoomInfo.Creater = tb_nickname.Text;
+            chatRoomInfo.Cnt = 1;
+
+            List<string> chatters = new List<string>();
+            chatters.Add(tb_chat_name.Text);
+
+
+            chatRoomModel.chatRoomInfo = chatRoomInfo;
+            chatRoomModel.chatters = chatters;
+
+            tb_chat_name.Text = "";
+            ////////
+
+            TcpIp.Instance.SendPacket(Command.CLIENT.REQUEST_CHATROOM_CREATE, chatRoomModel);
+
         }
 
 
@@ -68,13 +90,13 @@ namespace Client
 
         private void OnPacketReceived(Packet packet)
         {
-            if (packet.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)
+            if (packet.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)                       //채팅방 목록
             {
                 Dispatcher.Invoke(() => {
                     viewmodel.UpdateChatRoomList((List<ChatRoomListItemModel>)packet.Data);
                 });
             }
-            else if(packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_ENTER)
+            else if(packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_ENTER)                // 채팅방 입장
             {
                 ChatRoomModel chatRoomModel = (ChatRoomModel)packet.Data;
 
@@ -84,6 +106,17 @@ namespace Client
                 });
                 
                 
+            }
+            else if (packet.Command == (int)Command.SERVER.ACCEPT_CHATROOM_CREATE)              // 채팅방 생성
+            {
+                ChatRoomModel chatRoomModel = (ChatRoomModel)packet.Data;
+
+                Dispatcher.Invoke(() => {
+                    ChattingRoom chattingRoom = new ChattingRoom(chatRoomModel, tb_nickname.Text);
+                    chattingRoom.Show();
+                });
+
+
             }
         }
     }

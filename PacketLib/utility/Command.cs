@@ -11,8 +11,8 @@ namespace messenger.utility
         public enum CLIENT {
             REQUEST_CHATROOM_LIST,
             REQUEST_CHATROOM_ENTER,
-            REQUEST_CREATEROOM,
-            
+            REQUEST_CHATROOM_CREATE,
+
             SEND_MESSAGE,
         }
 
@@ -21,7 +21,7 @@ namespace messenger.utility
             SEND_CHATROOM_LIST,
 
             ACCEPT_CHATROOM_ENTER,
-            ACCEPT_CREATEROOM,
+            ACCEPT_CHATROOM_CREATE,
 
             SEND_MESSAGE,
         }

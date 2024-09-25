@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using utility;
+using static messenger.utility.Command;
 
 namespace tcpip
 {
@@ -37,32 +38,6 @@ namespace tcpip
 
         public static void Start()
         {
-            /////////////////////// test
-            ChatRoomListItemModel test = new ChatRoomListItemModel();
-            ChatRoomModel tt = new ChatRoomModel();
-
-            ChatModel cc = new ChatModel();
-            cc.chatterName = "에디";
-            cc.content = "나는야 발명가";
-
-            ChatModel cc_1 = new ChatModel();
-            cc_1.chatterName = "페티";
-            cc_1.content = "나는 고기 패티가 아니야";
-
-            test.Id = 0;
-            test.Creater = "크롱";
-            test.Cnt = 0;
-            test.Name = "빠른 이직 기원";
-            
-            tt.chatRoomInfo = test;
-
-            tt.chatHistory.Add(cc);
-            tt.chatHistory.Add(cc_1);
-
-            chatroomDic.Add(test.Id, tt);
-            chatroomsList.Add(test);
-            //////////////////////////////////
-
             server = new TcpListener(IPAddress.Any, IpPort.SERVER_PORT);
             server.Start();
             Console.WriteLine("서버가 시작되었습니다...");
@@ -102,7 +77,10 @@ namespace tcpip
                         if (client.Client.Available == 0)
                         {
                             Console.WriteLine("클라이언트 연결 끊김");
+
+                            clients.Remove(client);
                             client.Close();
+
                             break;
                         }
                     }
@@ -179,6 +157,37 @@ namespace tcpip
 
                     }
 
+                    else if (receivedPacket.Command == (int)(Command.CLIENT.REQUEST_CHATROOM_CREATE)) // 클라 - 채팅방 생성 요청
+                    {
+                        ChatRoomModel chatRoomModel = (ChatRoomModel)receivedPacket.Data;
+                        chatRoomModel.chatRoomInfo.Id = chatroomDic.Keys.Count;
+
+                        chatroomDic.Add(chatroomDic.Keys.Count, chatRoomModel);
+
+                        var responsePacket = new Packet
+                        {
+                            Command = (int)Command.SERVER.ACCEPT_CHATROOM_CREATE,
+                            Data = chatRoomModel
+                        };
+
+                        
+                        byte[] responseData = Converting.PacketToByteArray(responsePacket);
+                        stream.Write(responseData, 0, responseData.Length);
+
+                        // 채팅방 목록 업데이트 및 브로드캐스트
+                        chatroomsList.Add(chatRoomModel.chatRoomInfo);
+
+                        var sendPacket = new Packet
+                        {
+                            Command = (int)Command.SERVER.SEND_CHATROOM_LIST,
+                            Data = chatroomsList
+                        };
+
+
+                        byte[] sendData = Converting.PacketToByteArray(sendPacket);
+                        BroadcastMessage(sendPacket, null, clients);
+                    }
+
 
 
                     else
@@ -194,6 +203,7 @@ namespace tcpip
                 }
             }
 
+            clients.Remove(client);
             client.Close();
         }
 

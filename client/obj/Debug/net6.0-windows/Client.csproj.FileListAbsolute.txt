@@ -34,13 +34,17 @@ C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\Client.p
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\MaterialDesignColors.dll
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\MaterialDesignThemes.Wpf.dll
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\PacketLib.dll
+C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\PacketLib.pdb
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.csproj.AssemblyReference.cache
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\view\ChattingRoom.g.cs
+C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\view\MainWindow.g.cs
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client_MarkupCompile.cache
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client_MarkupCompile.lref
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\App.baml
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\view\ChattingRoom.baml
+C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\view\MainWindow.baml
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.g.resources
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.AssemblyInfoInputs.cache
@@ -52,7 +56,3 @@ C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\refint\C
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.pdb
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\Client.genruntimeconfig.cache
 C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\ref\Client.dll
-C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\PacketLib.dll
-C:\Users\rlagu\Desktop\gitgit\Messenger\Client\bin\Debug\net6.0-windows\PacketLib.pdb
-C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\view\MainWindow.g.cs
-C:\Users\rlagu\Desktop\gitgit\Messenger\Client\obj\Debug\net6.0-windows\view\MainWindow.baml

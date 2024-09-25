@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="메신저" Height="500" Width="410" ResizeMode="NoResize">
-    <Grid Margin="5">
+        Title="메신저" Height="500" Width="430" ResizeMode="CanMinimize">
+    <Grid Margin="5" Background="#E8EAF6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -14,17 +14,19 @@
             <RowDefinition Height="385*" />
             <RowDefinition Height="89*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <ListView Height="380" x:Name="lv_chatrooms" MouseDoubleClick="lv_chatrooms_MouseDoubleClick">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="id" Width="50" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="200" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Creater}" Header="생성자" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Cnt}" Header="인원" Width="40"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <StackPanel Grid.Column="0" Grid.Row="0" Background="WhiteSmoke">
+            <ScrollViewer x:Name="sv_chatrooms" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" >
+                <ListView Height="380" x:Name="lv_chatrooms" MouseDoubleClick="lv_chatrooms_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="id" Width="50" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="230" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Creater}" Header="생성자" Width="120"/>
+                            <!--<GridViewColumn DisplayMemberBinding="{Binding Cnt}" Header="인원" Width="40"/>-->
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Grid.Row="1">
@@ -33,7 +35,7 @@
                 <Button Margin="55, 0, 0, 0" Width="auto" Content="채팅방 생성" x:Name="btn_create_chat" Click="btn_create_chat_Click"/>
             </StackPanel>
 
-            <TextBlock x:Name="tb_nickname" Width="100" HorizontalAlignment="Right" Margin="0, 10, 20, 0" Text="신나는 라이언"/>
+            <TextBox x:Name="tb_nickname" Width="100" HorizontalAlignment="Right" Margin="0, 5, 30, 0" Text="신나는 라이언" MaxLength="10"/>
         </StackPanel>
     </Grid>
 </Window>

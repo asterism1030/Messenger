@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace Client.viewmodel
 {
@@ -45,6 +46,11 @@ namespace Client.viewmodel
             chatRoomInfo = chatRoomModel.chatRoomInfo;
             chatters = chatRoomModel.chatters;
 
+            if(chatRoomModel.chatHistory == null)
+            {
+                return;
+            }
+
             foreach(var chat in chatRoomModel.chatHistory)
             {
                 chatHistory.Add(chat);
@@ -64,6 +70,7 @@ namespace Client.viewmodel
         protected virtual void OnPropertyChanged(string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            
         }
     }
 }

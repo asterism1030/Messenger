@@ -100,6 +100,11 @@ namespace tcpip
                         PacketReceived?.Invoke(receivedPacket);
                     }
 
+                    else if (receivedPacket.Command == (int)(Command.SERVER.ACCEPT_CHATROOM_CREATE))
+                    {
+                        PacketReceived?.Invoke(receivedPacket);
+                    }
+
                     // TODO) 추가
 
                 }
