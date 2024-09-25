@@ -51,6 +51,7 @@ namespace utility
         {
             Type typeToDeserialize = null;
 
+            //String exeAssembly = "Server";
             String exeAssembly = "PacketLib";
             //String exeAssembly = Assembly.GetExecutingAssembly().FullName;
 
