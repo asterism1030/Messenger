@@ -5,6 +5,7 @@ using messenger.utility;
 using PacketLib;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -26,7 +27,7 @@ namespace tcpip
         public TcpClient Client { get; }
         public NetworkStream Stream { get; }
 
-        public TcpIp()
+        protected TcpIp()
         {
             client = new TcpClient(IpPort.SERVER_IP, IpPort.SERVER_PORT);
             stream = client.GetStream();
@@ -37,7 +38,7 @@ namespace tcpip
             Thread receiveThread = new Thread(() => ReceivePacket());
             receiveThread.Start();
 
-            Console.WriteLine("서버 연결");
+            Debug.WriteLine("서버 연결");
 
             
         }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace messenger.designPattern
 {
-    public class Singleton<T> where T : new()
+    public class Singleton<T> where T : class
     {
-        public Singleton() { }
+        protected Singleton() { }
 
         private static T _instance;
         private static readonly object _lock = new object();
@@ -25,7 +25,7 @@ namespace messenger.designPattern
                     {
                         if (_instance == null)
                         {
-                            _instance = new T();
+                            _instance = Activator.CreateInstance(typeof(T), true) as T;
                         }
                     }
                 }

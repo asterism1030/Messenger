@@ -10,11 +10,10 @@ namespace messenger.utility
     {
         public enum TYPE {
             REQUEST_CHATROOM_LIST,
-
-
+            REQUEST_CHATROOM_ENTER,
+            
             SEND_MESSAGE,
-            SEND_CREATEROOM
-
+            SEND_CREATEROOM,
         }
 
     }

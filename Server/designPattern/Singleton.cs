@@ -8,7 +8,7 @@ namespace messenger.designPattern
 {
     public class Singleton<T> where T : new()
     {
-        public Singleton() { }
+        protected Singleton() { }
 
         private static T _instance;
         private static readonly object _lock = new object();

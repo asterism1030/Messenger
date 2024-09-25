@@ -16,9 +16,6 @@ using tcpip;
 
 namespace Client
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private ChatRoomListViewModel viewmodel = new ChatRoomListViewModel();
@@ -32,13 +29,33 @@ namespace Client
             lv_chatrooms.ItemsSource = viewmodel.ChatRoomList;
         }
 
+        
+
+
+
+
+        
+
+
         private void btn_create_chat_Click(object sender, RoutedEventArgs e)
         {
-            // Test
-            TcpIp.Instance.SendPacket(Command.TYPE.REQUEST_CHATROOM_LIST);
+
         }
 
 
+        private void lv_chatrooms_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView listView = (ListView)sender;
+
+            if(listView.SelectedItem == null)
+            {
+                return;
+            }
+
+            ChatRoomListItemModel chatRoom = (ChatRoomListItemModel)listView.SelectedItem;
+            
+
+        }
 
 
         private void OnPacketReceived(Packet packet)

@@ -15,10 +15,10 @@
             <RowDefinition Height="89*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0">
-            <ListView Height="380" x:Name="lv_chatrooms">
+            <ListView Height="380" x:Name="lv_chatrooms" MouseDoubleClick="lv_chatrooms_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="230"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="230" />
                         <GridViewColumn DisplayMemberBinding="{Binding Creater}" Header="생성자" Width="110"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Cnt}" Header="인원" Width="50"/>
                     </GridView>
