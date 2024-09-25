@@ -9,7 +9,7 @@ namespace messenger.model
     [Serializable]
     public class ChatRoomListItemModel
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Creater { get; set; }
         public int Cnt { get; set; }

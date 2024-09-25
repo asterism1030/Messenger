@@ -30,13 +30,18 @@ namespace tcpip
         {
             // test
             ChatRoomListItemModel test = new ChatRoomListItemModel();
+            test.Id = 0;
             test.Creater = "크롱";
             test.Cnt = 0;
             test.Name = "빠른 이직 기원";
 
             chatroomList.Add(test);
-            chatroomList.Add(test);
-            chatroomList.Add(test);
+
+            test.Id = 1;
+            test.Creater = "루피";
+            test.Cnt = 0;
+            test.Name = "빠른 이직 기원";
+
             chatroomList.Add(test);
 
 
@@ -90,6 +95,10 @@ namespace tcpip
 
                         byte[] responseData = Converting.PacketToByteArray(responsePacket);
                         stream.Write(responseData, 0, responseData.Length);
+                    }
+                    if (receivedPacket.Command == (int)Command.CLIENT.REQUEST_CHATROOM_ENTER)
+                    {
+
                     }
 
 

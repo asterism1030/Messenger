@@ -18,8 +18,9 @@
             <ListView Height="380" x:Name="lv_chatrooms" MouseDoubleClick="lv_chatrooms_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="230" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Creater}" Header="생성자" Width="110"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="id" Width="50" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="채팅방" Width="200" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Creater}" Header="생성자" Width="100"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Cnt}" Header="인원" Width="50"/>
                     </GridView>
                 </ListView.View>
