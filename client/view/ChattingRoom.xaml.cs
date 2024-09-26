@@ -93,7 +93,16 @@ namespace Client.view
         {
             if (packet.Command == (int)Command.SERVER.SEND_MESSAGE)
             {
-                ChatModel chat = (ChatModel)packet.Data;
+                ChatIdModel chatIdModel = (ChatIdModel)packet.Data;
+
+                if(chatIdModel.id != viewmodel.ChatRoomInfo.Id)
+                {
+                    return;
+                }
+
+                ChatModel chat = new ChatModel();
+                chat.chatterName = chatIdModel.chatterName;
+                chat.content = chatIdModel.content;
 
                 Dispatcher.Invoke(() => {
                     viewmodel.ChatHistory.Add(chat);
