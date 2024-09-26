@@ -28,19 +28,21 @@ namespace Client.view
         public ChattingRoom(ChatRoomModel chatRoomModel, string nickName)
         {
             InitializeComponent();
-
+            
+            // event
             TcpIp.Instance.PacketReceived += OnPacketReceived;
 
+            // data
             viewmodel = new ChattingRoomViewModel(chatRoomModel, nickName);
 
             lv_chathistory.ItemsSource = viewmodel.ChatHistory;
 
+            // ui
             if(lv_chathistory.Items.Count > 0)
             {
                 lv_chathistory.ScrollIntoView(lv_chathistory.Items[lv_chathistory.Items.Count - 1]);
             }
             
-
             this.Title = chatRoomModel.chatRoomInfo.Name;
         }
 
@@ -52,7 +54,7 @@ namespace Client.view
                 return;
             }
 
-
+            // tcp/ip packet
             ChatIdModel chat = new ChatIdModel();
             chat.id = viewmodel.ChatRoomInfo.Id;
             chat.chatterName = viewmodel.UserNickName;
@@ -63,12 +65,10 @@ namespace Client.view
             chatModel.chatterName = chat.chatterName;
             chatModel.content = chat.content;
 
-            //viewmodel.ChatHistory.Add(chatModel);
-
-
             TcpIp.Instance.SendPacket(Command.CLIENT.SEND_MESSAGE, chat);
 
 
+            // ui
             tb_message.Text = "";
         }
 
@@ -81,6 +81,7 @@ namespace Client.view
                 return;
             }
 
+            // ui
             ChatModel chatModel = (ChatModel)listView.SelectedItem;
             Clipboard.SetText(chatModel.content);
 

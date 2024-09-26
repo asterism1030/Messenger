@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="messenger_1" Height="510" Width="400" >
     <Grid Background="AliceBlue">
-        <!--Background="#E3FDFA">-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
@@ -21,7 +20,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding chatterName}" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
+                                <TextBlock Text="{Binding chatterName}" FontSize="10" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0, 0, 0, 0" Foreground="#FF393939" />
                                 <TextBlock Text="{Binding content}" TextWrapping="Wrap" Background="Transparent" MaxWidth ="300"/>
                             </StackPanel>
                         </DataTemplate>

@@ -4,26 +4,28 @@ using PacketLib;
 using PacketLib.model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using utility;
 using static messenger.utility.Command;
+using static Server.utility.EnumDefinitions;
 
 namespace tcpip
 {
     public class TcpIp 
     {
+        private static TcpListener server;
 
+        
         // 클라이언트
         private static List<TcpClient> clients = new List<TcpClient>();
 
-        // TODO) 사용
-        private static Dictionary<string, TcpClient> clientsDic = new Dictionary<string, TcpClient>(); // 닉네임,클라이언트
-        
-        private static TcpListener server;
 
 
         //// 데이터
@@ -40,26 +42,26 @@ namespace tcpip
         {
             server = new TcpListener(IPAddress.Any, IpPort.SERVER_PORT);
             server.Start();
-            Console.WriteLine("서버가 시작되었습니다...");
+            Console.WriteLine("서버 시작...");
 
             while (true)
             {
-                // 클라이언트 연결 대기
+                // waiting to connect client
                 TcpClient client = server.AcceptTcpClient();
-                Console.WriteLine("클라이언트가 연결되었습니다.");
+                Console.WriteLine("클라이언트 연결");
 
-                // 클라이언트를 목록에 추가
                 clients.Add(client);
 
-                // 클라이언트를 처리하는 스레드 시작
-                Thread clientThread = new Thread(new ParameterizedThreadStart(ProcessClient));
+                // thread
+                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
+                clientThread.IsBackground = true;
                 clientThread.Start(client);
             }
         }
 
 
 
-        private static void ProcessClient(object clientObj)
+        private static void HandleClient(object clientObj)
         {
             TcpClient client = (TcpClient)clientObj;
             NetworkStream stream = client.GetStream();
@@ -76,27 +78,66 @@ namespace tcpip
                     {
                         if (client.Client.Available == 0)
                         {
-                            Console.WriteLine("클라이언트 연결 끊김");
-
-                            clients.Remove(client);
-                            client.Close();
-
                             break;
                         }
                     }
 
 
-                    //byte[] buffer = Converting.StreamToByteArry(stream);
-
                     int bytesRead = stream.Read(buffer, 0, buffer.Length);
                     if (bytesRead == 0) break;
 
-                    // 바이트 배열을 패킷으로 변환
+                    // byte arry to packet
                     Packet receivedPacket = Converting.ByteArrayToPacket(buffer.Take(buffer.Length).ToArray());
 
+                    // handel packet
+                    CLIENT_STATE client_state = HandleCommand(receivedPacket, client, stream);
 
-                    // Command - 패킷 처리
-                    if (receivedPacket.Command == (int)Command.CLIENT.REQUEST_CHATROOM_LIST)  // 클라 - 채팅방 리스트 요청
+                    if(client_state == CLIENT_STATE.EXIT)
+                    {
+                        break;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(MethodBase.GetCurrentMethod() + " : " + ex.Message);
+                    break;
+                }
+            }
+
+            Console.WriteLine("클라이언트 연결 끊김");
+
+            clients.Remove(client);
+            client.Close();
+        }
+
+
+        private static void BroadcastMessage(Packet packet, TcpClient sender, List<TcpClient> targetClients)
+        {
+            byte[] responseData = Converting.PacketToByteArray(packet);
+
+            foreach (TcpClient client in targetClients)
+            {
+                if (client == sender)
+                {
+                    continue;
+                }
+
+                NetworkStream stream = client.GetStream();
+                stream.Write(responseData, 0, responseData.Length);
+            }
+        }
+
+
+
+        private static CLIENT_STATE HandleCommand(Packet receivedPacket, TcpClient client, NetworkStream stream)
+        {
+            CLIENT_STATE client_state = CLIENT_STATE.REQUEST;
+
+
+            switch(receivedPacket.Command)
+            {
+                case (int)Command.CLIENT.REQUEST_CHATROOM_LIST:         // 클라 - 채팅방 리스트 요청
                     {
                         var responsePacket = new Packet
                         {
@@ -104,14 +145,13 @@ namespace tcpip
                             Data = chatroomsList
                         };
 
-
                         byte[] responseData = Converting.PacketToByteArray(responsePacket);
                         stream.Write(responseData, 0, responseData.Length);
-                    }
 
-                    else if (receivedPacket.Command == (int)(Command.CLIENT.REQUEST_CHATROOM_ENTER)) // 클라 - 채팅방 입장 요청
+                        break;
+                    }
+                case (int)Command.CLIENT.REQUEST_CHATROOM_ENTER:        // 클라 - 채팅방 입장 요청
                     {
-                        // TODO) 닉네임 추가하여 수정
                         int id = (int)receivedPacket.Data;
 
                         var responsePacket = new Packet
@@ -120,19 +160,18 @@ namespace tcpip
                             Data = chatroomDic[id]
                         };
 
-
                         byte[] responseData = Converting.PacketToByteArray(responsePacket);
                         stream.Write(responseData, 0, responseData.Length);
-                    }
 
-                    else if (receivedPacket.Command == (int)(Command.CLIENT.SEND_MESSAGE)) // 클라 - 채팅방 메시지 전송
+                        break;
+                    }
+                case (int)Command.CLIENT.SEND_MESSAGE:                  // 클라 - 채팅방 메시지 전송
                     {
                         ChatIdModel chatIdModel = (ChatIdModel)receivedPacket.Data;
 
                         ChatModel chat = new ChatModel();
                         chat.chatterName = chatIdModel.chatterName;
                         chat.content = chatIdModel.content;
-
 
                         chatroomDic[chatIdModel.id].chatHistory.Add(chat);
 
@@ -143,21 +182,15 @@ namespace tcpip
                             Data = chat
                         };
 
-                        
 
-                        // TODO) 채팅방 인원들에게만 broadcast
                         List<TcpClient> targetClients = new List<TcpClient>();
-
                         ChatRoomModel chatters = chatroomDic[chatIdModel.id];
 
-
                         BroadcastMessage(responsePacket, null, clients);
-                        //BroadcastMessage(responsePacket, client, clients);
-                        ///////////////////////////////////////////
 
+                        break;
                     }
-
-                    else if (receivedPacket.Command == (int)(Command.CLIENT.REQUEST_CHATROOM_CREATE)) // 클라 - 채팅방 생성 요청
+                case (int)Command.CLIENT.REQUEST_CHATROOM_CREATE:       // 클라 - 채팅방 생성 요청
                     {
                         ChatRoomModel chatRoomModel = (ChatRoomModel)receivedPacket.Data;
                         chatRoomModel.chatRoomInfo.Id = chatroomDic.Keys.Count;
@@ -170,7 +203,7 @@ namespace tcpip
                             Data = chatRoomModel
                         };
 
-                        
+
                         byte[] responseData = Converting.PacketToByteArray(responsePacket);
                         stream.Write(responseData, 0, responseData.Length);
 
@@ -186,47 +219,27 @@ namespace tcpip
 
                         byte[] sendData = Converting.PacketToByteArray(sendPacket);
                         BroadcastMessage(sendPacket, null, clients);
+
+                        break;
                     }
-
-
-
-                    else
+                case (int)Command.CLIENT.EXIT_APP:
                     {
-                        // 메시지를 모든 클라이언트에 브로드캐스트
-                        //BroadcastMessage(receivedPacket, client);
+                        client_state = CLIENT_STATE.EXIT;
+                        break;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("TcpIp ProcessClient : " + ex.Message);
-                    break;
-                }
+                default:
+                    {
+                        break;
+                    }
             }
 
-            clients.Remove(client);
-            client.Close();
+
+            return client_state;
         }
 
 
-        private static void BroadcastMessage(Packet packet, TcpClient sender, List<TcpClient> targetClients)
-        {
-            byte[] responseData = Converting.PacketToByteArray(packet);
 
-            // 모든 클라이언트에게 메시지 전송
-            foreach (TcpClient client in targetClients)
-            {
-                if (client != sender) // 보낸 클라이언트는 제외
-                {
-                    NetworkStream stream = client.GetStream();
-                    stream.Write(responseData, 0, responseData.Length);
-                }
-            }
-        }
+
     }
-
-
-
-
-
 
 }

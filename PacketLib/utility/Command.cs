@@ -14,6 +14,8 @@ namespace messenger.utility
             REQUEST_CHATROOM_CREATE,
 
             SEND_MESSAGE,
+
+            EXIT_APP,
         }
 
         public enum SERVER

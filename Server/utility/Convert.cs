@@ -43,31 +43,6 @@ namespace utility
         }
 
 
-        // TODO) 에러 수정
-        public static byte[] StreamToByteArry(NetworkStream stream)
-        {
-            if (stream == null)
-            {
-                return null;
-            }
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                /*
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-
-                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    memoryStream.Write(buffer, 0, bytesRead);
-                }
-                */
-
-                stream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
-        }
-
 
     }
 
@@ -81,7 +56,6 @@ namespace utility
         {
             Type typeToDeserialize = null;
 
-            //String exeAssembly = Assembly.GetExecutingAssembly().FullName;
             String exeAssembly = "PacketLib";
 
 

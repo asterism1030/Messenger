@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Documents;
@@ -27,6 +28,7 @@ namespace tcpip
 
         public TcpClient Client { get; }
         public NetworkStream Stream { get; }
+
 
         protected TcpIp()
         {
@@ -84,33 +86,13 @@ namespace tcpip
 
                     Packet receivedPacket = Converting.ByteArrayToPacket(buffer.Take(bytesRead).ToArray());
 
-                    // 패킷 유형별 처리
-                    if(receivedPacket.Command == (int)Command.SERVER.SEND_CHATROOM_LIST)
-                    {
-                        PacketReceived?.Invoke(receivedPacket);
-                    }
-                    
-                    else if (receivedPacket.Command == (int)(Command.SERVER.ACCEPT_CHATROOM_ENTER))
-                    {
-                        PacketReceived?.Invoke(receivedPacket);
-                    }
+                    PacketReceived?.Invoke(receivedPacket);
 
-                    else if (receivedPacket.Command == (int)(Command.SERVER.SEND_MESSAGE))
-                    {
-                        PacketReceived?.Invoke(receivedPacket);
-                    }
-
-                    else if (receivedPacket.Command == (int)(Command.SERVER.ACCEPT_CHATROOM_CREATE))
-                    {
-                        PacketReceived?.Invoke(receivedPacket);
-                    }
-
-                    // TODO) 추가
 
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("TcpIp : ReceiveMessages " + ex.Message);
+                    Debug.WriteLine(MethodBase.GetCurrentMethod() + " : " + ex.Message);
                     break;
                 }
             }

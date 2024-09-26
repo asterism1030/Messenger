@@ -10,10 +10,17 @@ namespace Client
     {
         public App()
         {
+            // tcp/ip
             TcpIp.Instance.Start();
 
+        }
 
-            
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+
+            // tcp/ip
+            TcpIp.Instance.SendPacket(Command.CLIENT.EXIT_APP);
         }
 
     }
