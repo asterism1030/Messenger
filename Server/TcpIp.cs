@@ -169,6 +169,7 @@ namespace tcpip
                     {
                         ChatIdModel chatIdModel = (ChatIdModel)receivedPacket.Data;
 
+                        // adding data
                         ChatModel chat = new ChatModel();
                         chat.chatterName = chatIdModel.chatterName;
                         chat.content = chatIdModel.content;
@@ -179,12 +180,9 @@ namespace tcpip
                         var responsePacket = new Packet
                         {
                             Command = (int)Command.SERVER.SEND_MESSAGE,
-                            Data = chat
+                            Data = chatIdModel
                         };
 
-
-                        List<TcpClient> targetClients = new List<TcpClient>();
-                        ChatRoomModel chatters = chatroomDic[chatIdModel.id];
 
                         BroadcastMessage(responsePacket, null, clients);
 
