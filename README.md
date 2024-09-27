@@ -7,6 +7,9 @@
 - Server: C# Application
 - PacketLib: C# Class Library
 
+## 📽️ 시연 영상  
+- **유튜브 링크**: [프로젝트 시연 영상 보기](https://www.youtube.com/watch?v=c4SQ0ZwVSp0)
+
 ## 🎯 목적
 **실시간 메신저 애플리케이션**을 개발하여 네트워크 통신 및 UI 개발 기술을 응용하고 리마인드하는 것을 목표로 합니다.
 하나의 서버에 다수의 클라이언트가 접속하는 구조이며 TCP/IP 기반의 메시지 송수신, 채팅방 생성 및 관리, 데이터 패킷화를 구현하였습니다.
