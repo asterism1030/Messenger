@@ -1,11 +1,13 @@
 # 📡 메신저 앱
 
 ## 🛠 개발 환경
-- .Net 6.0 Framework
-- Visual Studio 2022
-- Client: C# WPF
-- Server: C# Application
-- PacketLib: C# Class Library
+- **.Net Framework**: 6.0  
+- **IDE**: Visual Studio 2022  
+
+- **클라이언트**: C# WPF  
+- **서버**: C# Application  
+- **패킷 라이브러리**: C# Class Library  
+
 
 ## 📽️ 시연 영상  
 - **유튜브 링크**: [프로젝트 시연 영상 보기](https://www.youtube.com/watch?v=c4SQ0ZwVSp0)
